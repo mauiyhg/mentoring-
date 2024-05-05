@@ -1,0 +1,43 @@
+{% extends 'basementor.html.twig' %}
+
+{% block title %}Offer index{% endblock %}
+
+{% block body %}
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Price</th>
+              
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offer in offers %}
+            <tr>
+                <td>{{ offer.id }}</td>
+                <td>{{ offer.title }}</td>
+                <td>{{ offer.description }}</td>
+                <td>{{ offer.duration }} Day</td>
+                <td>{{ offer.price }}</td>
+             
+                <td>
+                    <a class="btn btn-sm btn-primary" href="{{ path('offer_show', {'id': offer.id}) }}">Show</a>
+                    <a class="btn btn-sm btn-warning" href="{{ path('offer_edit', {'id': offer.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<div style="margin-left: 500px;">
+    <a class="btn btn-sm btn-primary" href="{{ path('offer_new') }}">Create new</a>
+</div>
+{% endblock %}

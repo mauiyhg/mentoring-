@@ -1,0 +1,413 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+
+{# templates/suite_web/index.html.twig #}
+
+{# Ajoutez ce code où vous souhaitez afficher le lien #}
+
+
+
+<!-- ======= Header ======= --><header id="header" class="fixed-top d-flex align-items-center header-transparent">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+    <div class="logo me-auto">
+      <h1><a href="index.html">GuideUp</a></h1>
+   
+      
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html"><img src="assetsClient/img/logo.png" alt="" class="img-fluid"></a>-->
+    </div>
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul  style="color: black;">
+        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+        <li><a class="nav-link scrollto" href="#about">About</a></li>
+
+
+        <li><a class="nav-link scrollto" href="#events">Events</a></li>
+        <li><a class="nav-link scrollto" href="#chefs">Mentors</a></li>
+
+        {% if app.user %}
+        
+      <i class="bi bi-list mobile-nav-toggle"></i>
+      <li class="dropdown" style ="right: -10%;"><a href="#"><span>{{ app.user.firstName }} {{ app.user.lastName }}</span> <i class="bi bi-chevron-down"></i></a>
+        
+        <ul>
+          <li><a href="{{ path('profile_edit') }}">My profile</a></li>
+          <li><a href="{{ path('app_logout') }}">Log out</a></li>
+        </ul>
+      
+      </li>
+      
+
+      <li class="dropdown" style ="right: 29%;">
+        <a href="#"
+     class="bi bi-messenger"><i></i></a> 
+     <ul>
+       <li>  <div class="chats"  >
+         {% set displayedRecipients = [] %}
+         {% for message in messages %}
+            {% for user in users %} 
+            {% if message.idreciption == user.id and app.user.id == message.idsender %}
+            {% if user.id not in displayedRecipients %}
+            {% set displayedRecipients = displayedRecipients|merge([user.id]) %}
+           <a href="{{ path('app_chat', {'id': user.id}) }}" class="image" >
+             <img src="{{ asset('uploads/images/' ~ user.imageFileName) }}" width="50" style="border-radius: 50%;">
+       
+                <strong class="title">{{user.firstname}} {{user.lastname}}</strong></a>
+
+           
+                         
+                          
+                           {%endif%}
+             {% endif %}
+                           {%endfor%}
+             {%endfor%}
+           </div></li>
+         
+        </ul>
+  
+      {% endif %}
+
+      
+    </nav><!-- .navbar -->
+
+    
+
+  </div>
+</header><!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div class="hero-container">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+      <div class="carousel-inner" role="listbox">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active" style="background-image: url(assetsClient/img/slide/mhh.jpg);">
+          <div class="carousel-container">
+            <div class="carousel-content">
+              <h2 class="animate__animated animate__fadeInDown"><span>Guide</span> Up</h2>
+              <p class="animate__animated animate__fadeInUp">Your gateway to personalized mentorship. Connect with experienced mentors and unlock your full potential today.</p>
+              {% if not app.user %}
+              <div>
+    
+                <a href="{{ path('app_login') }}" class="btn-menu animate__animated animate__fadeInUp scrollto">Sign  in</a>
+                <a href="{{ path('app_register') }}" class="btn-book animate__animated animate__fadeInUp scrollto">Sign Up</a>
+              </div>
+              {% endif %}
+              <br>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+        
+
+    </div>
+  </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-5 align-items-stretch video-box" style='background-image: url("assetsClient/img/logoUP.png");'>
+          
+        </div>
+        <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch">
+          <div class="content">
+            <h3>Welcome to Guide up</h3>
+            <p>
+              Our mentoring platform is designed to connect mentors with mentees in order to facilitate growth, learning, and development. Whether you're seeking guidance in your career, looking to enhance your skills, or simply in need of advice, our platform provides the resources and support you need to succeed.
+            </p>
+            <p class="fst-italic">
+              Our dedicated team is committed to providing a supportive environment where both mentors and mentees can thrive.
+            </p>
+            <ul>
+              <li><i class="bx bx-check-double"></i> Connect with experienced mentors who can formation valuable insights and guidance.</li>
+              <li><i class="bx bx-check-double"></i> Access a wide range of resources and tools to support your personal and professional development.</li>
+              <li><i class="bx bx-check-double"></i> Join a community of like-minded individuals who are passionate about learning and growth.</li>
+            </ul>
+            <p>
+              We believe that everyone has the potential to achieve their goals, and our platform is here to help you unlock that potential. Join us today and take the first step towards a brighter future.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- End About Section -->
+  
+
+  <!-- ======= Why Us Section ======= -->
+<section id="why-us" class="why-us">
+  <div class="container">
+    <div class="section-title">
+      <h2>Why Choose <span>Our Platform</span></h2>
+      <p>Discover the benefits of joining our mentoring platform and why it's the right choice for your growth and development.</p>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="box">
+          <span>01</span>
+          <h4>Experienced Mentors</h4>
+          <p>Connect with experienced mentors who have a wealth of knowledge and insights to share, helping you navigate your personal and professional challenges.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 mt-4 mt-lg-0">
+        <div class="box">
+          <span>02</span>
+          <h4>Personalized Guidance</h4>
+          <p>Receive personalized guidance tailored to your specific needs and goals, ensuring that you get the support and direction necessary for your success.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 mt-4 mt-lg-0">
+        <div class="box">
+          <span>03</span>
+          <h4>Community Support</h4>
+          <p>Join a vibrant community of like-minded individuals who are passionate about learning and growth, fostering connections and collaborations that enrich your journey.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Why Us Section -->
+
+
+
+  <!-- ======= Specials Section ======= -->
+  
+
+
+  <!-- ======= Events Section ======= -->
+<section id="events" class="events">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Our <span>Events</span></h2>
+    </div>
+
+    <div class="events-slider swiper">
+      <div class="swiper-wrapper">
+
+        <!-- Loop through events and create slides -->
+        {% for event in events %}
+        <div class="swiper-slide">
+          <div class="row event-item">
+            <div class="col-lg-6">
+              <img src="{{ asset('uploads/images/' ~ event.imageFileName) }}" class="img-fluid" alt="{{ event.name }}">
+            </div>
+            <div class="col-lg-6 pt-4 pt-lg-0 content">
+              <h3>{{ event.name }}</h3>
+              <div class="price">
+                <p><span>{{ event.prix }}</span></p>
+              </div>
+              <p class="fst-italic">{{ event.subject }}</p>
+              <div class="section-title">
+                <h2>From <span>{{ event.fromDate|date('Y-m-d H:i:s') }}</span> to <span>{{ event.toDate|date('Y-m-d H:i:s') }}</span></h2>
+              </div>
+              <div style="text-align: center;">
+                <button class="button">
+                  <a href="{% if app.user %}{{ path('app_cart', {'id': event.id}) }}{% else %}{{ path('app_login') }}{% endif %}">participate</a>
+                </button>
+                              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+      <!-- Add pagination -->
+      <div class="swiper-pagination"></div>
+
+    
+    </div>
+
+  </div>
+</section>
+<!-- End Events Section -->
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper('.events-slider', {
+    slidesPerView: 'auto',
+    spaceBetween: 30,
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
+
+
+ 
+{% if app.user %}
+<!-- ======= Mentors Section ======= -->
+<section id="chefs" class="chefs">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Our Professional <span>Mentors</span></h2>
+      <p>Meet the experienced mentors ready to guide you on your journey to success.</p>
+    </div>
+   
+    <div class="row">
+     
+      {% for user in users %}
+      {% for role in user.roles %}
+      {% if role in ['MENTOR'] %}
+      {% if user.domaine ==app.user.domaine %}
+
+      <!-- Mentor 1 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="member text-center">
+          <div class="pic">
+            <img src="{{ asset('uploads/images/' ~ user.imageFileName) }}" alt="{{ user.lastName }}" "Profile" class="rounded-circle border border-primary" style="width: 200px; height: 210px;">
+          </div>
+          <div class="member-info mt-3">
+            <p><strong>{{ user.firstName }} {{ user.lastName }}</strong></p>
+            <span>{{ user.domaine }}</span>
+            
+           <h3>
+          {% for userDataItem in userData %}
+
+              {% if userDataItem.user_id == user.id %}
+              {% if userDataItem.avg_note is not null %}
+        {% for i in 1..userDataItem.avg_note %}
+        
+        <i class="fa-sharp fa-solid fa-star fa-beat-fade" style="color: #FFD43B;"></i>
+ 
+        {% endfor %}
+        {% else %}
+     
+        No rating available
+        
+    {% endif %}
+    </h3>
+    {% endif %}
+
+{% endfor %}
+
+  </h1>
+
+  
+
+          
+
+    <button  class="more success">
+      <a href='   {{ path('about', {'id': user.id}) }}' > See More
+    </button>
+
+
+
+          </div>
+        </div>
+      </div>
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+
+  {% endfor %}
+ 
+
+  
+         
+        </div>
+      </div>
+      
+    
+    
+   
+ 
+</div>
+</div>
+</section><!-- End Mentors Section -->
+{% endif %}
+
+ 
+
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact">
+    
+
+      {{ form_start(form, {'attr': {'class': 'php-email-form'}}) }}
+
+      <div class="row">
+          <div class="col-md-6 form-group">
+              {{ form_row(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Your Name'}}) }}
+          </div>
+          <div class="col-md-6 form-group mt-3 mt-md-0">
+              {{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Your Email'}}) }}
+          </div>
+      </div>
+      
+      <div class="form-group mt-3">
+          {{ form_row(form.subject, {'attr': {'class': 'form-control', 'placeholder': 'Subject'}}) }}
+      </div>
+      
+      <div class="form-group mt-3">
+          {{ form_row(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Message'}}) }}
+      </div>
+      
+      <div class="my-3">
+          <div class="loading">Loading</div>
+          <div class="error-message"></div>
+          <div class="sent-message">{{ 'Your message has been sent. Thank you!' | trans }}</div>
+      </div>
+      
+      <div class="text-center">
+          <button type="submit">{{ 'Send Message' | trans }}</button>
+      </div>
+      
+      {{ form_end(form) }}
+      
+      
+
+    </div>
+  </section><!-- End Contact Section -->
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="container">
+    <h3>GuideUp</h3>
+    
+      <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+      <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+      <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+      <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+    </div>
+    <div class="copyright">
+      &copy; Copyright <strong><span>GuideUp</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+   
+    </div>
+  </div>
+</footer><!-- End Footer -->
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+{% endblock %}

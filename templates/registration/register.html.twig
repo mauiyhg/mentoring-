@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+{% block body %}
+<div class="container" style="margin-left: -150px;">
+
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="pt-4 pb-2" >
+                                <h5 class="card-title text-center pb-0 fs-4" style="color: black;">Create an Account</h5>
+                                <p class="text-center small"style="color: black;">Enter your personal details to create an account</p>
+                            </div>
+
+                           
+                            <div class="col-12">
+                                {{ form_start(registrationForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
+                                <fieldset class="mb-3">
+                                    <legend style="color: black;">Mon identité</legend>
+                                    {{ form_row(registrationForm.lastname) }}
+                                    {{ form_row(registrationForm.firstname) }}
+                                    {{ form_row(registrationForm.email) }}
+                                    {{ form_row(registrationForm.domaine) }}
+                                </fieldset>
+
+                                <fieldset class="mb-3">
+                                    <legend style="color: black;">Mes coordonnées</legend>
+                                    {{ form_row(registrationForm.address) }}
+                                    {{ form_row(registrationForm.zipcode) }}
+                                    {{ form_row(registrationForm.city) }}
+                                    {{ form_row(registrationForm.imageFileName) }}
+                                </fieldset>
+
+
+                                
+                                {{ form_row(registrationForm.roles) }} 
+                                <fieldset id="mentorFields" class="mb-3" style="display: none;">
+                             
+                                 
+                                    <legend style="color: black;">Champs supplémentaires pour les mentors</legend>
+                                   
+                                    {{ form_row(registrationForm.profile) }}
+                                  
+                                    {{ form_row(registrationForm.exprience) }}
+                                    {{ form_row(registrationForm.competence) }}
+                                  
+                                </fieldset>
+                             
+                               {{ form_row(registrationForm.plainPassword, {
+                                    label: 'Password'
+                                }) }}
+
+                           
+
+                           
+
+                                <button type="submit" class="btn btn-primary btn-lg my-3">M'inscrire</button>
+                                <a href="{{ path('app_login') }}" class="btn btn-secondary">Me connecter</a>
+                                {{ form_end(registrationForm) }}
+                            </div>
+                
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sélectionnez le champ de rôle
+        const roleField = document.getElementById('registration_form_roles');
+        
+        // Ajoutez un gestionnaire d'événements pour écouter les changements
+        roleField.addEventListener('change', function() {
+            // Récupérez les cases à cocher cochées
+            const checkedRoles = document.querySelectorAll('input[name="registration_form[roles][]"]:checked');
+            
+            // Initialisez un tableau pour stocker les valeurs des rôles sélectionnés
+            const selectedRoles = [];
+            
+            // Parcourez les cases à cocher cochées et ajoutez les valeurs sélectionnées au tableau
+            checkedRoles.forEach(function(role) {
+                selectedRoles.push(role.value);
+            });
+            
+            // Affichez les valeurs des rôles sélectionnés dans la console
+            console.log("Selected roles:", selectedRoles);
+
+            // Affichez ou masquez les champs supplémentaires pour les mentors en fonction de la sélection du rôle
+            const mentorFields = document.getElementById('mentorFields');
+            if (selectedRoles.includes('MENTOR')) {
+                mentorFields.style.display = 'block';
+            } else {
+                mentorFields.style.display = 'none';
+            }
+        });
+    });
+
+
+
+    
+</script>
+
+
+
+{% endblock %}

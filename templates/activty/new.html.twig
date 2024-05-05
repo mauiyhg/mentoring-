@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Activty{% endblock %}
+
+{% block body %}
+    <h1>Create new Activty</h1>
+
+    {{ include('activty/_form.html.twig') }}
+    <div class="bg-light text-center rounded p-4">
+    <a href="{{ path('app_activty_index') }}">back to list</a>
+    <style>
+        .bg-light {
+            background-color: transparent !important; /* Annuler la couleur de fond de la classe bg-light */
+        }
+    </style>
+    </div>
+{% endblock %}

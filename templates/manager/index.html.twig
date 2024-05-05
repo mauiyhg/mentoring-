@@ -1,0 +1,241 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" style="max-width: 280px;" >
+            <div class="card" style="background: linear-gradient(to bottom, #5686C4, #133056 );">
+                <div class="card-header p-3 pt-2" style="background: linear-gradient(to bottom, #5686C4, #55036A);">
+                    <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                    <div class="text-end pt-1">
+                        <p class="text-sm mb-0 text-capitalize">Total vue</p>
+                        <h4 class="mb-0">{{ visitCount }}</h4>
+                        
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <div class="card-footer p-3">
+                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than last month</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" style="max-width: 280px;">
+            <div class="card" style="background: linear-gradient(to bottom, #5686C4, #133056 );">
+                <div class="card-header p-3 pt-2" style="background: linear-gradient(to bottom, #5686C4, #55036A);">
+                    <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                        
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="text-end pt-1">
+                        
+                        <p class="text-sm mb-0 text-capitalize">totalUsers</p>
+                        <h4 class="mb-0">{{ totalUsers }}</h4>
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <div class="card-footer p-3">
+                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+14% </span>than last month</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" style="max-width: 280px;">
+            <div class="card"  style="background: linear-gradient(to bottom, #5686C4, #133056 );">
+                <div class="card-header p-3 pt-2" style="background: linear-gradient(to bottom, #5686C4, #55036A);">
+                    <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="text-end pt-1">
+                        <p class="text-sm mb-0 text-capitalize">totalUsers</p>
+                        <h4 class="mb-0">{{ totalUsers }}</h4>
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <div class="card-footer p-3">
+                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than last month</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+       <div class="container">
+        <div class="row mt-4">
+            <div class="col-sm-12 col-xl-6" style="max-width: 500px;">
+                <div class="card-body px-0 pt-0 pb-2">
+                    <h6 class="mb-4">Registration evolution</h6>
+                    <canvas id="users" width="741" height="370" style="display: block; box-sizing: border-box; height: 296px; width: 592.8px;"></canvas>
+                </div>
+            </div>
+            
+            <div class="col-sm-12 col-xl-6" style="max-width: 360px;">
+                <div class="card-body px-0 pt-0 pb-2">
+                    <h6 class="mb-4">Events</h6>
+                    <canvas id="events" width="1200" height="850" style="display: block; box-sizing: border-box; height: 296px; width: 592.8px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+    
+
+
+
+
+    <table class="table datatable">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+                <tr>
+                    <th scope="row">{{event.id}}</th>
+                    <td>
+                        <div class="d-flex px-2 py-1 align-items-center">
+                            <div>
+                                <img src="{{ asset('uploads/images/' ~ event.imageFileName) }}" style="width: 60px; height: auto;"> </div>
+                            <div class="ms-4">
+                                <p class="text-xs font-weight-bold mb-0">Prix :</p>
+                                <h6 class="text-sm mb-0">{{ event.prix  }}</h6>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <p class="text-xs font-weight-bold mb-0">Name:</p>
+                            <h6 class="text-sm mb-0">{{ event.name  }}</h6>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <p class="text-xs font-weight-bold mb-0">Subject:</p>
+                            <h6 class="text-sm mb-0">{{ event.subject }}</h6>
+                        </div>
+                    </td>
+               
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctxUsers = document.getElementById('users').getContext('2d');
+            var usersChart = new Chart(ctxUsers, {
+                type: 'bar',
+                data: {
+                    labels: {{ dates|raw }},
+                    datasets: [{
+                        label: 'Number of users for each role',
+                        data: {{ usersCount|raw }},
+                        borderColor: '#000000',
+                        backgroundColor: [
+                            'rgba(246, 249, 110, 0.8)',
+                            'rgba(169, 249, 110, 0.8)',
+                            'rgba(239, 98, 60, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgb(246, 249, 110)',
+                            'rgb(169, 249, 110)',
+                            'rgb(239, 98, 60)'
+                        ],
+                        borderWidth: 1,
+                        // couleur du texte de l'étiquette
+                        labelColor: 'white'
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                stepSize: 1 
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontColor: 'white' // couleur des étiquettes (labels) en blanc
+                            }
+                        }]
+                    },
+                    legend: {
+                        labels: {
+                            // couleur du texte de la légende
+                            fontColor: 'white'
+                        }
+                    }
+                }
+            });
+            var ctxEvents = document.getElementById('events').getContext('2d');
+            var eventsChart = new Chart(ctxEvents, {
+                type: 'polarArea',
+                data: {
+                    labels: ["Education and formation ", "Other event", "Arts", "Social"],
+                    datasets: [{
+                        label: 'Number of events for each role',
+                        data: {{ eventCount|raw }},
+                        borderColor: '#000000',
+                        backgroundColor: ["#D68A52", "#FAE703", "#B9DC3A", "#7EE051"],
+                        borderWidth: 1.4,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                stepSize: 1,
+                              
+                            }
+                        }],
+                      
+                    },
+                    legend: {
+                        labels: {
+                            // couleur du texte de la légende
+                            fontColor: 'white'
+                        }
+                    }
+                } 
+            }); 
+            
+            
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'baseCart.html.twig' %}
+
+{% block title %}Stripe Paiement !{% endblock %}
+
+{% block body %}
+
+<div class="container">
+   <span class="exit-button" onclick="window.history.back()"><img class="avatar" src="{{ asset('assetsmessenger/image/annuler.png') }}" width="20"></span>
+
+    <h1 class="cart">My Cart</h1>
+
+      
+      <section id="product">
+         {% for event in events %}
+        <div class="product-card">
+
+            <img src="{{ asset('uploads/images/' ~ event.imageFileName) }}" alt="product" class="product">
+
+            <span class="product-name">{{ event.name }}</span>
+
+            <p class="product-details">{{ event.subject }}</p>
+
+            <span class="product-price">{{ event.prix }} €</span> 
+        
+        </div>
+
+     
+   {% endfor %}
+      
+      </section>
+
+      <section id="resume-card">
+         {% for event in events %}
+            <div class="resume-card"></div>
+            
+
+            <h2 class="order-summary">Order Summary</h2>
+
+            <img src="{{asset('/image/line.png')}}" alt="line" class="line">
+
+            
+            <span class="total">prix</span>
+
+            <span class="total-price">{{ event.prix }} €</span>
+
+            <div class="paiment-mode-card"></div>
+
+            <span class="paiement-mode">Payment Mode</span>
+            
+            <span class="paiement-mode-type">Stripe</span>
+           
+
+      </section>   
+
+    <section class="checkout">
+        <form action="{{ path('app_checkout') }}" method="post">
+            {% for event in events %}
+            <input type="hidden" name="amount" value="{{ event.prix }} ">
+            {% endfor %}
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="btn">
+                <span class="paynow">Pay Now</span>
+            </button>
+        </form>
+    </section>
+    
+ {% endfor %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Activty index{% endblock %}
+
+{% block body %}
+<div class="col-12" style="text-align: center;">
+    
+    <div class="card-header pb-0">
+    <h6>Activity</h6>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+    <table class="table align-items-center mb-0">
+    <thead>
+    <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subject</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Text</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> ImageFileName</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activty in activties %}
+            <tr>
+                <td>{{ activty.id }}</td>
+                <td>{{ activty.name }}</td>
+                <td>{{ activty.subject }}</td>
+                <td>{{ activty.text }}</td>
+                <td><img src="{{ asset('uploads/images/' ~ activty.imageFileName) }}" style="width: 60px; height: auto;"> </div>
+
+                <td>
+                    <a class="btn btn-sm btn-primary" href="{{ path('app_activty_show', {'id': activty.id}) }}">show</a>
+                    <a class="btn btn-sm btn-warning" href="{{ path('app_activty_edit', {'id': activty.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <div style="text-align:center;">
+    <a class="btn btn-sm btn-primary" href="{{ path('app_activty_new') }}">Create new</a>
+</div>
+</div>
+    </div>
+    
+    </div>
+{% endblock %}

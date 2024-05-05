@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}fgdsxhxg{% endblock %}</title>
+
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+
+  
+      
+        <!-- Google Fonts -->
+        <link href="https://fonts.gstatic.com" rel="preconnect">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href={{asset("assetsabout/vendor/bootstrap/css/bootstrap.min.css" )}}rel="stylesheet">
+  <link href={{asset("assetsabout/vendor/bootstrap-icons/bootstrap-icons.css" )}}rel="stylesheet">
+  <link href={{asset("assetsabout/vendor/boxicons/css/boxicons.min.css" )}}rel="stylesheet">
+  <link href={{asset("assetsabout/vendor/quill/quill.snow.css" )}}rel="stylesheet">
+  <link href={{asset("assetsabout/vendor/quill/quill.bubble.css")}} rel="stylesheet">
+  <link href={{asset("assetsabout/vendor/remixicon/remixicon.css")}} rel="stylesheet">
+  <link href={{asset("assetsabout/vendor/simple-datatables/style.css")}} rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href={{asset("assetsabout/css/style.css" )}}rel="stylesheet">
+
+
+
+
+      
+
+        
+        {% endblock %}
+
+        {% block javascripts %}
+
+
+
+
+
+
+
+        <!--   Core JS Files   -->
+
+
+        <script src={{asset("assetsabout/vendor/apexcharts/apexcharts.min.js")}}></script>
+        <script src={{asset("assetsabout/vendor/bootstrap/js/bootstrap.bundle.min.js")}}></script>
+        <script src={{asset("assetsabout/vendor/chart.js/chart.min.js")}}></script>
+        <script src={{asset("assetsabout/vendor/echarts/echarts.min.js")}}></script>
+        <script src={{asset("assetsabout/vendor/quill/quill.min.js")}}></script>
+        <script src={{asset("assetsabout/vendor/simple-datatables/simple-datatables.js")}}></script>
+        <script src={{asset("assetsabout/vendor/tinymce/tinymce.min.js")}}></script>
+        <script src={{asset("assetsabout/vendor/php-email-form/validate.js")}}></script>
+      
+        <!-- Template Main JS File -->
+        <script src={{asset("assetsabout/js/main.js")}}></script>
+      
+
+
+
+
+
+
+ 
+
+        <style>
+            body {
+                background-image: url("../assetsClient/img/test.jpg") ;
+                background-size: cover;
+                background-position: center;
+            }
+        </style>
+        {% endblock %}
+  </head>
+  <body>
+      {% block header %}<!-- ======= Header ======= --><header id="header" class="fixed-top d-flex align-items-center header-transparent">
+          <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+        
+            <div class="logo me-auto">
+              <h1><a href="index.html">GuideUp</a></h1>
+              <!-- Uncomment below if you prefer to use an image logo -->
+              <!-- <a href="index.html"><img src="assetsClient/img/logo.png" alt="" class="img-fluid"></a>-->
+            </div>
+        
+            <nav id="navbar" class="navbar order-last order-lg-0">
+              <ul>
+          
+                <li><a class="nav-link scrollto active" href="{{ path('app_suite_web') }}">Home</a></li>
+                {% for user in users %}
+                {% if user.id == mentor.id%}
+                <li><a class="nav-link scrollto" href="{{ path('app_commentaires', {'id': user.id}) }}">Offres</a></li>
+               
+                <li><a class="nav-link scrollto" href='{{ path('about', {'id': user.id}) }}'>About</a></li>
+  
+                <li><a class="nav-link scrollto" href="{{ path('app_chat', {'id': user.id}) }}">contact</a></li>
+                {%endif%}
+                {%endfor%}
+                
+              </ul>
+            </nav><!-- .navbar -->
+        
+            
+        
+          </div>
+        </header><!-- End Header -->{% endblock %}
+      {% block body %}{% endblock %}
+  
+</div>
+    </body>
+
+</html>

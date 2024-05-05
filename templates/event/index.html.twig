@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event index{% endblock %}
+
+{% block body %}
+<div class="col-12" style="text-align: center;">
+  
+    <div class="card-header pb-0">
+    <h6>Events</h6>
+    <br>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+    <table class="table align-items-center mb-0">
+    <thead>
+    <tr>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Id</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">subject</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User id</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">prix</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">actions</th>
+    <th class="text-secondary opacity-7"></th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            
+
+               {% for event in events %}
+        
+             <td>{{ event.id }}</td >
+             <td>{{ event.name }}</td >
+             <td>{{ event.subject }}</td >
+             <td>{{ event.userId }}</td >
+             <td>{{ event.prix }}</td >
+             <td>
+                <a class="btn btn-sm btn-primary" href="{{ path('app_event_show', {'id': event.id}) }}">show</a>
+                <a class="btn btn-sm btn-warning" href="{{ path('app_event_edit', {'id': event.id}) }}">edit</a>
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <div style="text-align: center;">
+    <a class="btn btn-sm btn-primary" href="{{ path('app_event_new') }}">Create new</a>
+    </div>
+</div>
+    </div>
+    </div>
+   
+
+
+{% endblock %}

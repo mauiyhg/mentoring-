@@ -1,0 +1,36 @@
+{# templates/mentorship/demande_mentorat.html.twig #}
+
+{% extends 'baserequest.html.twig' %}
+
+{% block title %}Demande Mentorat{% endblock %}
+
+{% block body %}
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<div class="form-box">
+    <span class="exit-button" onclick="window.history.back()"><img class="avatar" src="{{ asset('assetsmessenger/image/annuler.png') }}" width="20"></span>
+    {{ form_start(form) }}
+
+    {# Rendre le champ "message" #}
+    {{ form_label(form.message) }}
+    {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+
+    {# Définir l'ID du mentee (utilisateur connecté) comme champ caché #}
+    {{ form_widget(form.id_mentee, {'attr': {'class': 'form-control'}, 'value': app.user.id}) }}
+
+    {# Vérifier si l'ID de l'offre correspond à l'ID de l'offre du mentor #}
+    {% for offer in offerMentor %}
+        {% if  offer.id == offers.id %}
+            {# Rendre le champ "id_mentor" avec la valeur de l'ID du mentor #}
+            {{ form_widget(form.id_mentor, {'attr': {'class': 'form-control'}, 'value': offer.mentor}) }}
+        {% endif %}
+    {% endfor %}
+    
+    {# Rendre le champ "id_offer" avec la valeur de l'ID de l'offre #}
+    {{ form_widget(form.offer, {'attr': {'class': 'form-control'}, 'value': offers.id}) }}
+
+    <button type="submit" class="button">Send request</button>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}

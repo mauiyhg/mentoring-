@@ -1,0 +1,34 @@
+
+{% extends 'baseMentor.html.twig' %}
+
+{% block title %}New Formation{% endblock %}
+
+{% block body %}
+
+   
+        
+        <h6 class="mb-4">créer Formation</h6>
+        {{ form_start(form) }}
+        <div class="mb-3">
+            {{ form_label(form.type) }}
+            {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.subscrib) }}
+            {{ form_widget(form.subscrib, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.prix) }}
+            {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+        </div>
+       
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+        {{ form_end(form) }}
+   
+
+
+{% endblock %}

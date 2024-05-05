@@ -1,0 +1,196 @@
+{% extends 'base3.html.twig' %}
+
+
+
+
+
+{% block body %}
+
+<style>
+    .commentaire-input textarea {
+        width: 370px;
+        height: 30px; 
+
+
+
+    }
+
+
+    .container {
+        margin-top: 0px;
+     
+       
+         margin-bottom: 0px; 
+        
+    }
+</style>
+
+
+  <section id="specials" class="specials">
+    <div class="container">
+        <br><br><br>
+        <div class="section-title">
+            <h2>Check Mentor's <span>Offers</span></h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="nav flex-column">
+                    {% for offer in offers %}
+                    {% if offer.mentor == mentor.id%}
+                        <li class="nav-item">
+                            <a class="nav-link {% if loop.first %}active show{% endif %}" data-bs-toggle="tab" href="#tab-{{ loop.index }}">{{ offer.title }}</a>
+                        </li>
+                        {%endif%}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-9 mt-4 mt-lg-0">
+                <div class="tab-content">
+                    {% for offer in offers %}
+                    {% if offer.mentor == mentor.id%}
+                        <div class="tab-pane {% if loop.first %}active show{% endif %}" id="tab-{{ loop.index }}">
+                            <div class="row" >
+                                <div class="col-lg-8 details order-2 order-lg-1">
+                                    <p>duration:</p>
+                                    <h3>{{ offer.duration }} Day</h3>
+                                    <p>price:</p>
+                                    <h3>{{ offer.price }} TND</h3>
+                                    <p>{{ offer.description }}</p>
+                                    <button  class="button">
+                                    <a href='   {{ path('Demande', {'id': offer.id}) }}'">
+                                        request mentorat
+                                    </button>
+                                
+                                </div>
+                                
+                            </div>
+                       
+                        </div>
+                      
+                        {%endif%}
+                        {% endfor %}
+                       
+                </div>
+            </div>
+         
+        </div>
+    </div>
+</section><!-- End Specials Section -->
+
+
+    
+{% endblock %}
+{% block footer %}
+
+
+<section><!-- feedback -->
+    <div class="section-title">
+        <h2>Mentor's<span>  Reviews</span></h2>
+         
+    </div>
+    <div class="container" style="width: 620px; height: 100px; margin-bottom: 120px;">
+        <div class="row justify-content-center">
+          <div class="col-md-10" > <!-- Vous pouvez ajuster la largeur en modifiant col-md-X -->
+            <div class="card"  style=" background-color: transparent;" >
+              <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+            
+
+        <div style="background-color:transparent; padding: 10px; overflow-y: auto; max-height: 200px; width: 450px; height: 100px;">
+
+        {% for commentaire in commentaires %}
+        <div>
+            <p style="background-color: rgba(240, 255, 255, 0.5);">  {{ commentaire.commentaire }}</p>
+               
+           
+        </div>
+        {% endfor %}
+    
+    
+    </div>
+    
+    {{ form_start(form) }}
+
+    <div class="commentaire-input d-flex align-items-start">
+        
+        {{ form_row(form.Commentaire, {'label': false}) }}    
+
+      
+    </div>
+
+    <br>
+    {{ form_row(form.Note) }}
+    
+    <div class="stars d-flex justify-content-center align-items-center">
+        <h1>
+        {% for i in 1..5 %}
+            
+         
+            <i class="fa-sharp fa-regular fa-star fa-flip-horizontal" data-value="{{ i }}"></i>
+
+            
+        {% endfor %}
+        </h1>
+    </div>
+    <button type="submit" class="button" style="height:40px;margin-left:150px;">Valider</button>
+    {{ form_end(form) }}
+    
+
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+<script>
+    window.onload = () => {
+        const stars = document.querySelectorAll(".fa-sharp.fa-regular.fa-star.fa-flip-horizontal");
+        const note = document.querySelector("#{{ form.Note.vars.id }}");
+
+        for(star of stars){
+            star.addEventListener("mouseover", function(){
+                resetStars();
+                this.style.color = "#FFD43B";
+                this.classList.add("las");
+                this.classList.remove("lar");
+                let previousStar = this.previousElementSibling;
+
+                while(previousStar){
+                    previousStar.style.color = "#FFD43B";
+                    previousStar.classList.add("las");
+                    previousStar.classList.remove("lar");
+                    previousStar = previousStar.previousElementSibling;
+                }
+            });
+
+            star.addEventListener("click", function(){
+                note.value = this.dataset.value;
+            });
+
+            star.addEventListener("mouseout", function(){
+                resetStars(note.value);
+            });
+        }
+
+        function resetStars(note = 0){
+            for(star of stars){
+                if(star.dataset.value > note){
+                    star.style.color = "black";
+                    star.classList.add("lar");
+                    star.classList.remove("las");
+                }else{
+                    star.style.color = "#FFD43B";
+                    star.classList.add("las");
+                    star.classList.remove("lar");
+                }
+            }
+        }     
+    }
+</script>
+
+
+</section><!-- feedback -->{% endblock %}

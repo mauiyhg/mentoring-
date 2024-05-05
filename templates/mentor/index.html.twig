@@ -1,0 +1,17 @@
+{% extends 'basementor.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+{% if app.user.validated %}
+
+
+{% else %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<legend  style="padding-left: 55px;">Your account is not yet validated. Please wait for validation...</leegend>
+    <br>  <br>
+    <div style="padding-left: 300px; padding-right: 0px;">
+    <a href="{{ path('app_suite_web') }}" class="btn btn-primary" > Return</a>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base3.html.twig' %}
+
+{% block title %}Ajouter un commentaire{% endblock %}
+
+{% block body %}
+
+
+
+{% for userDataItem in userData %}
+{% if userDataItem.user_id == mentor.id %}
+    
+        {% for i in 1..userDataItem.avg_note %}
+            ★
+        {% endfor %}
+    </h1>
+    {% endif %}
+{% endfor %}
+
+
+
+ {{ dump(userData) }}
+
+{% endblock %}

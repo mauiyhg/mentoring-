@@ -1,0 +1,60 @@
+{% block body %}
+
+    <div class="bg-light rounded h-100 p-4">
+       
+        {{ form_start(form) }}
+
+     
+
+        <div class="mb-3">
+            <label for="{{ form.name.vars.id }}" class="form-label">Name</label>
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.subject.vars.id }}" class="form-label">Subject</label>
+            {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.user_id.vars.id }}" class="form-label">User id</label>
+            {{ form_widget(form.user_id, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.prix.vars.id }}" class="form-label">Prix</label>
+            {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.imageFileName.vars.id }}" class="form-label">Image</label>
+            {{ form_widget(form.imageFileName, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.from_date.vars.id }}" class="form-label">Start date</label>
+            {{ form_widget(form.from_date, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.to_date.vars.id }}" class="form-label">End date</label>
+            {{ form_widget(form.to_date, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.color.vars.id }}" class="form-label">Color</label>
+            {{ form_widget(form.color, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+       
+
+        <!-- Ajoutez d'autres champs de formulaire au besoin -->
+        <div class="bg-light text-center rounded p-4">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+
+
+{% endblock %}

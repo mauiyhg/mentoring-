@@ -1,0 +1,49 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GrapheController!{% endblock %}
+
+{% block body %}
+<h1>
+    {% if event is defined %}
+        ID de l'événement : {{ eventId }} <br>
+        Nom de l'événement : {{ event.name }}
+    {% else %}
+        Event not found
+    {% endif %}
+</h1>
+
+{# Générer l'URL avec le générateur d'URL Symfony #}
+<a href="{{ path('app_graphe', {'id': event.id}) }}">Lien vers cet événement</a>
+
+{# Créer un élément canvas pour afficher le graphique #}
+<canvas id="myChart" width="400" height="400"></canvas>
+
+<script>
+    // Obtenez le contexte du canevas
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    // Créez le graphique en utilisant Chart.js
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45],
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

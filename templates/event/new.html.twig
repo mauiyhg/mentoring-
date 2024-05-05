@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Event{% endblock %}
+
+{% block body %}
+
+    <div class="bg-light rounded h-100 p-4">
+        
+        <h6 class="mb-4">créer Event</h6>
+        {{ form_start(form) }}
+        <div class="mb-3">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.subject) }}
+            {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.user_id) }}
+            {{ form_widget(form.user_id, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.prix) }}
+            {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.from_date) }}
+            {{ form_widget(form.from_date, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.to_date) }}
+            {{ form_widget(form.to_date, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.color) }}
+            {{ form_widget(form.color, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        
+        
+        
+        
+        <div class="mb-3">
+            {{ form_label(form.imageFileName) }}
+            {{ form_widget(form.imageFileName, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <!-- Ajoutez d'autres champs de formulaire au besoin -->
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+        {{ form_end(form) }}
+        <style>
+            .bg-light {
+                background-color: transparent !important; /* Annuler la couleur de fond de la classe bg-light */
+            }
+        </style>
+   
+</div>
+
+{% endblock %}

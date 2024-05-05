@@ -1,0 +1,54 @@
+{% extends 'baseMentor.html.twig' %}
+
+{% block title %}Event index{% endblock %}
+
+{% block body %}
+
+<div class="col-12" style="text-align: center;">
+   
+   
+    <h6>Formation</h6>
+   
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+    <table class="table align-items-center mb-0">
+    <thead>
+    <tr>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Id</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subscrib</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Prix</th>
+
+    <th class="text-secondary opacity-7"></th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            
+        {% for formation in formations %}
+            <tr>
+                <td>{{ formation.id }}</td>
+                <td>{{ formation.type }}</td>
+                <td>{{ formation.name }}</td>
+                <td>{{ formation.subscrib }}</td>
+                <td>{{ formation.prix }}</td>
+                <td>
+                    <a href="{{ path('app_formation_show', {'id': formation.id}) }}">show</a>
+                    <a href="{{ path('app_formation_edit', {'id': formation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div style="text-align: center;">
+<a class="btn btn-sm btn-primary" href="{{ path('app_formation_new') }}">Create new</a>
+</div>
+</div>
+</div>
+
+{% endblock %}

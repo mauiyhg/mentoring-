@@ -1,0 +1,41 @@
+{% extends 'basementor.html.twig' %}
+
+{% block title %}Offer{% endblock %}
+
+{% block body %}
+<div class="bg-light rounded h-100 p-4">
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ offer.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ offer.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ offer.description }}</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>{{ offer.duration }} Min</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ offer.price }}</td>
+            </tr>
+            <!-- Add more fields as needed -->
+        </tbody>
+    </table>
+    <div class="bg-light text-center rounded p-4">
+        <a href="{{ path('offer_index') }}">Back to list</a>
+        <br>
+        <a href="{{ path('offer_edit', {'id': offer.id}) }}">Edit</a>
+
+        {{ include('offer/_delete_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

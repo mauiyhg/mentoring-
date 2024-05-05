@@ -1,0 +1,108 @@
+{% extends 'base3.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<br><br><br>
+  
+<main id="main" class="main">
+
+  <section class="section profile">
+    <div class="row">
+      {% for user in users %}
+      {% if user.id == mentor.id%}
+      <div class="col-xl-4">
+
+        <br><br>
+       
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-10"> <!-- Vous pouvez ajuster la largeur en modifiant col-md-X -->
+              <div class="card">
+                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                  <div>
+                    {% if user.imageFileName %}
+                    <img src="{{ asset('uploads/images/' ~ user.imageFileName) }}" alt="Profile" class="rounded-circle border border-primary" style="width: 200px; height: 210px;">
+                    {% endif %}
+                  </div>
+                  <br>
+                  <strong>{{ user.firstname }} {{ user.lastname }}</strong>
+                  <p >{{ user.domaine }}</p>
+                  <div class="social-links mt-2">
+                    <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <br>
+
+      </div>
+     
+      <div class="col-xl-8">
+        <br><br><br>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-12"> <!-- Vous pouvez ajuster la largeur en modifiant col-md-X -->
+              <div class="card">
+                <div class="card-body pt-3">
+                  <div class="tab-content pt-2">
+                    <div class="tab-pane fade profile-overview active show" id="profile-overview">
+                    
+                      <p style="color: #F4C126; font-size: 21px; font-family: Arial, sans-serif;">About</p>
+                      
+                      <p class="small fst-italic">{{ user.profile }}</p>
+                      <p style="color: #F4C126; font-size: 21px; font-family: Arial, sans-serif;">Profile Details</p>
+                     
+        
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                        <div class="col-lg-9 col-md-8">{{ user.firstname }} {{ user.lastname }}</div>
+                      </div>
+        
+                   
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Domaine</div>
+                        <div class="col-lg-9 col-md-8">{{ user.domaine }}</div>
+                      </div>
+        
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Country</div>
+                        <div class="col-lg-9 col-md-8">{{ user.city }}</div>
+                      </div>
+        
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Email</div>
+                        <div class="col-lg-9 col-md-8">{{ user.email }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">skills</div>
+                        <div class="col-lg-9 col-md-8">{{ user.competence }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">experience</div>
+                        <div class="col-lg-9 col-md-8">{{ user.exprience }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      {% endif %}
+      {% endfor%}
+    </div>
+  </section>
+
+
+</main>
+{% endblock %}

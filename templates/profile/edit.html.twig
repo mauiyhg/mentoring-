@@ -1,0 +1,112 @@
+
+    {%  extends 'base.html.twig' %}
+
+    {% block header %}
+
+    {% endblock %}
+    
+    {% block sidebar %}
+    
+    {% endblock %}
+    
+    {% block footer %}
+    
+    {% endblock %}
+{% block title %}Edit Profile{% endblock %}
+
+{% block body %}
+<div class="col-md-8">
+    <div class="card">
+        <div class="card-header pb-0">
+            <div class="d-flex align-items-center">
+                <p class="mb-0">Edit Profile</p>
+            </div>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            <p class="text-uppercase text-sm" style="color: black;">User Information</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" >
+                        {{ form_label(form.email, 'Email address', {'label_attr': {'class': 'form-control-label'}}) }}
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_label(form.firstname, 'First name', {'label_attr': {'class': 'form-control-label'}}) }}
+                        {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_label(form.lastname, 'Last name', {'label_attr': {'class': 'form-control-label'}}) }}
+                        {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    {% if ['MENTOR','MENTEE'] in user.roles  %}
+                    <div class="form-group">
+                        {{ form_label(form.domaine, 'Domaine', {'label_attr': {'class': 'form-control-label'}}) }}
+                        {{ form_widget(form.domaine, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {%endif%}
+                </div>
+              
+               
+            </div>
+            <hr class="horizontal dark">
+            <p class="text-uppercase text-sm" style="color: black;">Contact Information</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        {{ form_label(form.address, 'Address', {'label_attr': {'class': 'form-control-label'}}) }}
+                        {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form_label(form.city, 'City', {'label_attr': {'class': 'form-control-label'}}) }}
+                        {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form_label(form.zipcode, 'Postal code', {'label_attr': {'class': 'form-control-label'}}) }}
+                        {{ form_widget(form.zipcode, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            {% if 'MENTOR' in user.roles  %}
+            <hr class="horizontal dark">
+            <p class="text-uppercase text-sm" style="color: black;">Mentor</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        {{ form_label(form.profile, 'Profile', {'label_attr': {'class': 'form-control-label'}}) }}
+                        {{ form_widget(form.profile, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form_label(form.competence, 'Competence', {'label_attr': {'class': 'form-control-label'}}) }}
+                        {{ form_widget(form.competence, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form_label(form.exprience, 'experience', {'label_attr': {'class': 'form-control-label'}}) }}
+                        {{ form_widget(form.exprience, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+            <button class="btn btn-primary btn-sm" type="submit">Save</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

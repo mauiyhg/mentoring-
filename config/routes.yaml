@@ -1,0 +1,47 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+app_suite_web:
+    path: /
+    controller: App\Controller\SuiteWebController::index
+manager:
+    path: /manager
+    controller: App\Controller\ManagerController::index
+
+activty:
+    path: /activty
+    controller: App\Controller\ActivtyController::index
+
+app_graphe:
+    path: /graphe/event/{id}
+    controller: App\Controller\GrapheController::index
+    methods: ['GET']
+
+
+admin_contact_messages:
+    path: /admin/contact-messages
+    controller: App\Controller\AdminController::contactMessages
+
+
+# config/routes.yaml
+
+profile_edit:
+    path: /profile/edit
+    controller: App\Controller\ProfileController::editProfile
+
+# config/routes.yaml
+
+validate_user:
+    path: /validate-user/{id}
+    controller: App\Controller\UsersController::validateUser
+
+
+process_payment:
+    path: /process-payment
+    controller: App\Controller\PaymentController::processPayment
+commentaire_show:
+    path: /commentaire/{id}
+    controller: 'App\Controller\CommentairesController::showByUser'
+    methods: ['GET']

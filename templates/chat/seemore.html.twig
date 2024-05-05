@@ -1,0 +1,191 @@
+{% extends 'basemessenger.html.twig' %}
+
+{% block body %}
+  
+	<body>
+		<header>
+			<div class="padding">
+				<aside class="left">
+					<content>
+					
+					</content>
+				</aside>
+				<aside class="center">
+					<content>
+						<svg fill="#ceced0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="30px" height="30px"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"/></svg>
+						<input type="search" name="q" placeholder="Search...">
+					</content>
+				</aside>
+				<aside class="right">
+					<content>
+						<span class="exit-button" onclick="window.history.back()"><img class="avatar" src="{{ asset('assetsmessenger/image/annuler.png') }}" width="20"></span>
+			
+						</aside>
+			</div>
+		</header>
+		<content>
+			<aside class="left">
+				<div class="chats" >
+					{% set displayedRecipients = [] %}
+					{% for message in messages %}
+						 {% for user in users %} 
+						 {% if message.idreciption == user.id and app.user.id == message.idsender %}
+						 {% if user.id not in displayedRecipients %}
+						 {% set displayedRecipients = displayedRecipients|merge([user.id]) %}
+						<a href="{{ path('app_chat', {'id': user.id}) }}" class="image" >
+							<img src="{{ asset('uploads/images/' ~ user.imageFileName) }}" width="50" style="border-radius: 50%;">
+				
+						     <strong class="title">{{user.firstname}} {{user.lastname}}</strong></a>
+
+						<br><br>
+                          
+                           
+                            {%endif%}
+							{% endif %}
+                            {%endfor%}
+							{%endfor%}
+						</div>
+				
+					
+					</div>
+			</aside>
+			<aside class="center">
+				<div class="toolbar">
+                    {% for user in users %} 
+                    {%if reciptions.id == user.id%} 
+					<label class="name">{{user.firstname}} {{user.lastname}}</label>
+                    {%endif%}
+                    {%endfor%}
+					<br><br>
+				</div>
+				<content>
+					<a href="{{ path('app_chat', {'id': reciptions.id}) }}">See Less</a>
+					{% set displayedRecipients = [] %}
+                   {% set messageCount = 0 %}
+						{% for message in messages  %}
+						
+						{% if reciptions.id == message.idreciption and app.user.id == message.idsender %}
+						{% set messageCount = messageCount + 1 %}
+						{% endif %}
+						{% endfor %}
+					<ul class="messages">
+						
+					
+				
+					
+
+						{% for message in messages  %}
+						
+						{% for user in users %} 
+						{%if reciptions.id == user.id%} 
+					
+						{% if reciptions.id == message.idreciption and app.user.id == message.idsender %}
+					
+						
+						<li class="me"  >
+					
+							<div class="message-list">
+                                        
+                             
+							 <div class="message" >
+								  {{ message.message }}
+							 </div>
+							 <br><br><br><br>
+								 <div class="footer">
+									Message sent {{ message.createdAt|date('Y-m-d H:i:s') }}
+
+								  </div>	
+                                
+							</div>
+						
+							
+						</li>
+						
+					
+						{% else %}
+						{% if message.idsender == reciptions.id and  message.idreciption == app.user.id  %}
+				
+                        <li class="other">
+                           
+                       
+						<div class="image">
+							<img src="{{ asset('uploads/images/' ~ user.imageFileName) }}" width="50" style="border-radius: 50%;">
+							</div>
+							<div class="message-list">
+							
+								<div class="message">
+                                    {{ message.message }}							
+								</div>
+								<div class="footer">
+									Message sent {{ message.createdAt|date('Y-m-d H:i:s') }}
+								</div>
+                               
+                              
+						
+							</div>
+						</li>
+						{% endif %}
+						{% endif %}
+						{% endif %}
+						{% endfor %}
+						
+							{% endfor %}
+					</ul>
+                    
+				</content>
+			</aside>
+			<aside class="right">
+				
+				<center>
+					<div class="image">
+                        {% for user in users %} 
+                        {%if reciptions.id == user.id%} 
+						<img src="{{ asset('uploads/images/' ~ user.imageFileName) }}" width="100" style="border-radius: 50%;">
+						<div class="status online"></div>
+					</div>
+                   
+					<label class="name">{{user.firstname}} {{user.lastname}}</label>
+                    {%endif%}
+                    {%endfor%}
+					<label class="active">active now</label>
+					<div class="button">
+						<button>
+							<svg class="icon" fill="#1790f0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="30px" height="30px"><path d="M 7.972656 22.386719 C 9.296875 20.839844 10.101563 19.265625 8.777344 17.738281 L 7.980469 16.824219 C 7.398438 16.15625 4.6875 14.914063 10.214844 10.113281 C 15.730469 5.3125 16.589844 8.167969 17.164063 8.839844 L 17.964844 9.757813 C 19.289063 11.277344 20.957031 10.703125 22.675781 9.605469 L 23.714844 8.945313 C 25.425781 7.84375 26.550781 6.644531 25.230469 5.117188 L 24.507813 4.296875 C 24.019531 3.621094 22.421875 1.738281 19.390625 1.28125 C 15.753906 0.730469 11.585938 2.464844 7.015625 6.441406 C 2.441406 10.410156 0.144531 14.296875 0.183594 17.980469 C 0.21875 21.039063 1.859375 22.886719 2.457031 23.464844 L 3.179688 24.292969 C 4.5 25.8125 5.847656 24.867188 7.171875 23.320313 Z"></path></svg>
+							Call group
+						</button>
+						<button>
+							<svg class="icon" fill="#1790f0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="30px" height="30px"><path d="M 2.21875 6 C 0.988281 6 0 6.988281 0 8.21875 L 0 17.78125 C 0 19.011719 0.988281 20 2.21875 20 L 17 20 L 17 6 Z M 22.8125 7 L 18 10 L 18 16 L 22.8125 19 L 24 19 L 24 7 Z"></path></svg>
+							Video chat
+						</button>
+					</div>
+				</center>
+			</aside>
+		</content>
+	</body>
+
+
+   
+{% endblock %}
+{% block footer %}
+
+<div  style="text-align: center;">
+	<br>              
+	{{ form_start(form) }}
+	<div class="mb-3">
+		
+		{{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+	
+		{{ form_widget(form.idsender, {'attr': {'class': 'form-control'}, 'value': app.user.id}) }}
+		
+				{{ form_widget(form.idreciption, {'attr': {'class': 'form-control'}, 'value':reciptions.id}) }}
+
+				
+			  
+					
+				<button type="submit"   >   <img class="avatar"src="{{ asset('assetsmessenger/image/envoyer.png') }}" width="40" > </button>
+
+	</div>
+		{{ form_end(form) }}
+  <br>  <br>  <br> 
+				</div>
+				{% endblock %}

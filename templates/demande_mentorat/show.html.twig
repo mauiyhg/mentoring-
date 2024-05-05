@@ -1,0 +1,59 @@
+{% extends 'baseaprove.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<div class="col-12" style="text-align: center;">
+    
+    <div class="card-header pb-0">
+    <h6>Mentor Requests</h6>
+    <br>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+    <table class="table align-items-center mb-0">
+    <thead>
+    <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">First Name</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Last Name</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">City</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Message</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Validation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for demande in demandes %}
+            {% for user in users %}
+            {% if user.id == demande.idmentee and  app.user.id == demande.idmentor%}
+                <tr>
+                    <td class="text-white">{{ user.firstName }}</td>
+                    <td class="text-white">{{ user.lastName }}</td>
+                    <td class="text-white">{{ user.city }}</td>
+                    <td class="text-white">{{ user.email }}</td>
+
+                    <td class="text-white">
+                        {{ demande.message }}
+                    </td>
+                  
+                  
+                    <td class="text-white"> {% if demande.aproved %}Approved{% else %}<a href="{{ path('aprove', {'id': user.id}) }}">Approve</a>{% endif %}</td>
+                 
+                
+                    <td class="text-white">
+                        <button  onclick="window.location.href='   {{ path('app_chat', {'id': user.id}) }}'">
+                            contact
+                        </button>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+    </div>
+    </div>
+    
+{% endblock %}

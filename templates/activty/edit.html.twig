@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Activty{% endblock %}
+
+{% block body %}
+ 
+<div class="bg-light text-center rounded p-4">
+    {{ include('activty/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_activty_index') }}">back to list</a>
+
+    {{ include('activty/_delete_form.html.twig') }}
+</div>
+{% endblock %}

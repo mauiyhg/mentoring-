@@ -1,0 +1,40 @@
+{% block body %}
+
+    <div class="bg-light rounded h-100 p-4">
+       
+        {{ form_start(form) }}
+
+     
+
+        <div class="mb-3">
+            <label for="{{ form.name.vars.id }}" class="form-label">Name</label>
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.subject.vars.id }}" class="form-label">Subject</label>
+            {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.text.vars.id }}" class="form-label">Text</label>
+            {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.imageFileName.vars.id }}" class="form-label">ImageFileName</label>
+            {{ form_widget(form.imageFileName, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+      
+
+        <!-- Ajoutez d'autres champs de formulaire au besoin -->
+        <div class="bg-light text-center rounded p-4">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+
+
+{% endblock %}

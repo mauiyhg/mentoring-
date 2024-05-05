@@ -1,0 +1,14 @@
+{% extends 'baseMentor.html.twig' %}
+
+{% block title %}Edit offer{% endblock %}
+
+{% block body %}
+    
+
+    {{ include('offer/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="bg-light text-center rounded p-4">
+    <a href="{{ path('offer_index') }}">back to list</a>
+    </div>
+    {{ include('offer/_delete_form.html.twig') }}
+</div>
+    {% endblock %}

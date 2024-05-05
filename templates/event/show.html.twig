@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+<div class="card-body px-0 pt-0 pb-2">
+
+    <table class="table align-items-center mb-0">
+        <tbody>
+            <tr>
+                <th  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"  >Id</th>
+                <td>{{ event.id }}</td>
+            </tr>
+            <tr>
+                <th  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Name</th>
+                <td>{{ event.name }}</td>
+            </tr>
+            
+            <tr>
+                <th  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >User_id</th>
+                <td>{{ event.userId }}</td>
+            </tr>
+            <tr>
+                <th  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Type_code</th>
+                <td>{{ event.subject}}</td>
+            </tr>
+            <tr>
+                <th  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >ImageFileName</th>
+                <td><img src="{{ asset('uploads/images/' ~ event.imageFileName) }}" style="width: 60px; height: auto;"> </div>
+                </td>
+                
+            </tr>
+            <tr>
+                <th  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >From</th>
+                <td>{{ event.fromDate ? event.fromDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >To</th>
+                <td>{{ event.toDate ? event.toDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Color</th>
+                <td>{{ event.color }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br> <br> 
+    <div style="text-align: center;">
+    <a  class="btn btn-sm btn-primary" href="{{ path('app_event_index') }}">back to list</a>
+<br>
+    <a  class="btn btn-sm btn-warning" href="{{ path('app_event_edit', {'id': event.id}) }}">edit</a>
+
+    {{ include('event/_delete_form.html.twig') }}
+</div></div>
+{% endblock %}

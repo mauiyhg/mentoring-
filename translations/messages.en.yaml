@@ -1,0 +1,15 @@
+# messages.en.yaml
+
+Name: Name
+Subject: Subject
+User id: User id
+Prix: Prix
+From date: From date
+To date: To date
+Color: Color
+"Bleu : Education and formation": "Bleu: Education and formation"
+
+"Vert : Arts and Culture": "Vert: Arts and Culture"
+"Rouge : Social": "Rouge: Social"
+"Violet : other event": "Violet: other event"
+Image file name: Image file name
